@@ -1,0 +1,89 @@
+.slider {
+  --trackSize: 0.21428571rem;
+  --thumbSize: 1.5rem;
+  position: relative;
+  height: var(--thumbSize);
+
+  & .track {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: calc(var(--thumbSize) / 2);
+    right: calc(var(--thumbSize) / 2);
+    height: 0;
+
+    & .segment {
+      position: absolute;
+      transform: translateY(-50%);
+      height: var(--trackSize);
+      margin: 0 calc(0px - (var(--trackSize) / 2));
+      border-radius: calc(var(--trackSize) / 2);
+      background-color: rgba(0, 0, 0, .05);
+
+      &:global(.red) {
+        background-color: #db2828;
+      }
+
+      &:global(.orange) {
+        background-color: #f2711c;
+      }
+
+      &:global(.yellow) {
+        background-color: #fbbd08;
+      }
+
+      &:global(.olive) {
+        background-color: #b5cc18;
+      }
+
+      &:global(.green) {
+        background-color: #21ba45;
+      }
+
+      &:global(.teal) {
+        background-color: #00b5ad;
+      }
+
+      &:global(.blue) {
+        background-color: #2185d0;
+      }
+
+      &:global(.violet) {
+        background-color: #6435c9;
+      }
+
+      &:global(.purple) {
+        background-color: #a333c8;
+      }
+
+      &:global(.pink) {
+        background-color: #e03997;
+      }
+
+      &:global(.brown) {
+        background-color: #a5673f;
+      }
+
+      &:global(.grey) {
+        background-color: #767676;
+      }
+
+      &:global(.black) {
+        background-color: #1b1c1d;
+      }
+    }
+  }
+
+  & .thumb {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    width: 1.5rem;
+    height: 1.5rem;
+    border: none;
+    box-shadow: 0 1px 2px 0 rgba(34, 36, 38, .15), 0 0 0 1px rgba(34, 36, 38, .15) inset;
+    border-radius: calc(var(--thumbSize) / 2);
+    background: white linear-gradient(transparent, rgba(0, 0, 0, .05)) !important;
+  }
+}
