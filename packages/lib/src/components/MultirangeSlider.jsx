@@ -11,7 +11,7 @@ import styles from './index.module.css';
  * 
  * @param {number} [min=0] - The minimum possible value
  * @param {number} [max=100] - The maximum possible value
- * @param {number[]} [values] - An array holding all the values
+ * @param {number[]} [values=[0]] - An array holding all the values
  * @param {string} [trackColor='blue'] - The color of the track segments
  * @param {function} [onChange] - Called when the values change
  */
