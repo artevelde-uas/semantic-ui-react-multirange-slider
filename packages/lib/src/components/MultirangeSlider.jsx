@@ -72,7 +72,7 @@ export default ({
 
     function handleMouseUp(event) {
         const thumbs = Array.from(currentThumb.parentElement.getElementsByClassName(styles.thumb));
-        const values = thumbs.map(thumb => thumb.value);
+        const values = thumbs.map(thumb => Number(thumb.value));
 
         onChange && onChange(values);
 
