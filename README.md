@@ -39,7 +39,7 @@ yarn add semantic-ui-react-multirange-slider
 Slider without options
 
 ```jsx
-import MultirangeSlider from 'semantic-ui-react-multirange-slider';
+import { MultirangeSlider } from 'semantic-ui-react-multirange-slider';
 import 'semantic-ui-react-multirange-slider/dist/index.css';
 
 export default () => (
@@ -54,7 +54,7 @@ export default () => (
 Slider with two thumbs
 
 ```jsx
-import MultirangeSlider from 'semantic-ui-react-multirange-slider';
+import { MultirangeSlider } from 'semantic-ui-react-multirange-slider';
 import 'semantic-ui-react-multirange-slider/dist/index.css';
 
 export default () => (
@@ -70,7 +70,7 @@ export default () => (
 Slider with multiple thumbs and green track
 
 ```jsx
-import MultirangeSlider from 'semantic-ui-react-multirange-slider';
+import { MultirangeSlider } from 'semantic-ui-react-multirange-slider';
 import 'semantic-ui-react-multirange-slider/dist/index.css';
 
 export default () => (
