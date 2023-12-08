@@ -93,7 +93,7 @@ export default ({
                     const trackRight = 100 - thumbLeft;
                     const trackClass = classNames(
                         styles.segment,
-                        { [trackColor]: (index > 0) }
+                        { [trackColor]: ((values.length === 1) || (index > 0)) }
                     );
 
                     return (
