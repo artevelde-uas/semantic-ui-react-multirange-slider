@@ -19,7 +19,7 @@ export default ({
     min = 0,
     max = 100,
     values = [0],
-    trackColor = 'blue',
+    trackColor = 'black',
     onChange
 }) => {
     let currentThumb;
