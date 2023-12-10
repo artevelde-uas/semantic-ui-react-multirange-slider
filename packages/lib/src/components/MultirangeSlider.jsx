@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useRef } from 'react';
 import classNames from 'classnames';
 
 import styles from './index.module.css';
@@ -14,7 +14,7 @@ import styles from './index.module.css';
  * @param {number} [step=1] - The step value
  * @param {number[]} [values=[0]] - An array holding all the values
  * @param {string} [trackColor='blue'] - The color of the track segments
- * @param {function} [onChange] - Called when the values change
+ * @param {function} [onChange] - Fired when the values have changed
  */
 export default ({
     min = 0,
@@ -24,14 +24,19 @@ export default ({
     trackColor = 'black',
     onChange
 }) => {
-    let currentThumb;
+    const sliderRef = useRef();
+    const valuesRef = useRef(Array.from(values));
+
+    let currentIndex;
+    let currentThumb = null;
     let offsetLeft;
 
-    function handleMouseDown(event) {
+    function handleMouseDown(event, index) {
         // Only handle mouse down event on thumbs
         if (!event.target.matches(`.ui.${styles.slider} .${styles.thumb}`)) return;
 
-        // Store current thumb and offset
+        // Store current index, thumb and offset
+        currentIndex = index;
         currentThumb = event.target;
         offsetLeft = currentThumb.offsetLeft - event.clientX;
 
@@ -62,33 +67,57 @@ export default ({
         const trackRight = 100 - thumbLeft;
         const value = (min + ((left / trackWidth) * (max - min)));
         const rounded = Math.round((Math.round(value / step) * step) * 1e10) / 1e10;
+        const previousValue = valuesRef.current[currentIndex];
 
         currentThumb.value = rounded;
         currentThumb.style.left = `${thumbLeft}%`;
         currentThumb.previousElementSibling.style.right = `${trackRight}%`;
         currentThumb.nextElementSibling.style.left = `${thumbLeft}%`;
 
+        if (rounded !== previousValue) {
+            // Store the new value
+            valuesRef.current[currentIndex] = rounded;
+        }
+
         event.preventDefault();
     }
 
     function handleMouseUp(event) {
-        const thumbs = Array.from(currentThumb.parentElement.getElementsByClassName(styles.thumb));
-        const values = thumbs.map(thumb => Number(thumb.value));
+        if (valuesRef.current[currentIndex] !== values[currentIndex]) {
+            const event = new Event('input', { bubbles: true });
 
-        onChange && onChange(values);
+            event.data = {
+                index: currentIndex,
+                value: valuesRef.current[currentIndex],
+                initialValue: values[currentIndex],
+                values: valuesRef.current
+            };
+
+            sliderRef.current.dispatchEvent(event);
+        }
 
         event.preventDefault();
     }
 
+    function handleInput(event) {
+        // Change synthetic event type
+        event._reactName = 'onChange';
+        event.type = 'change';
+
+        // Fire the change event if set
+        onChange && onChange(event, event.nativeEvent.data);
+    }
+
     return (
         <div
+            ref={sliderRef}
             className={`ui ${styles.slider}`}
-            onMouseDown={handleMouseDown}
+            onInput={handleInput}
         >
             <div
                 className={styles.track}
             >
-                {values.map((value, index, values) => {
+                {valuesRef.current.map((value, index, values) => {
                     const thumbLeft = ((value - min) / (max - min)) * 100;
                     const trackLeft = (((values[index - 1] ?? min) - min) / (max - min)) * 100;
                     const trackRight = 100 - thumbLeft;
@@ -112,6 +141,7 @@ export default ({
                                 style={{
                                     left: `${thumbLeft}%`
                                 }}
+                                onMouseDown={event => handleMouseDown(event, index)}
                             />
                             {(index === values.length - 1) && (
                                 <div
