@@ -90,6 +90,17 @@ Clone the package and run `yarn start`
 
 ## API
 
+### Modules
+
+<dl>
+<dt><a href="#module_MultirangeSlider">MultirangeSlider</a></dt>
+<dd><p>A MultirangeSlider is used to modify multiple values inside a given range</p>
+</dd>
+<dt><a href="#module_MultirangeSlider">MultirangeSlider</a></dt>
+<dd><p>A MultirangeSlider is used to modify multiple values inside a given range</p>
+</dd>
+</dl>
+
 <a name="module_MultirangeSlider"></a>
 
 ### MultirangeSlider
@@ -105,4 +116,19 @@ A MultirangeSlider is used to modify multiple values inside a given range
 | [trackColor] | <code>string</code> | <code>"black"</code> | The color of the track segments |
 | [onInput] | <code>function</code> |  | Continuesly fired while a value changes |
 | [onChange] | <code>function</code> |  | Fired when the values have changed |
+
+<a name="module_MultirangeSlider"></a>
+
+### MultirangeSlider
+
+A MultirangeSlider is used to modify multiple values inside a given range
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [min] | <code>number</code> | <code>0</code> | The minimum possible value |
+| [max] | <code>number</code> | <code>100</code> | The maximum possible value |
+| [step] | <code>number</code> | <code>1</code> | The step value |
+| [value] | <code>number</code> |  | The value of the slider |
+| [trackColor] | <code>string</code> | <code>"'blue'"</code> | The color of the track segments |
+| [onChange] | <code>function</code> |  | Called when the values change |
 

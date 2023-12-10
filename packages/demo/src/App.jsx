@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Header, Item } from 'semantic-ui-react';
-import { MultirangeSlider } from 'semantic-ui-react-multirange-slider';
+import { SimpleSlider, MultirangeSlider } from 'semantic-ui-react-multirange-slider';
 
 
 function handleEvent(event, data) {
@@ -15,6 +15,17 @@ export default () => (
             <Item>
                 <Item.Content>
                     <Item.Header>Simple Slider</Item.Header>
+                    <Item.Meta>Slider without options</Item.Meta>
+                    <Item.Description>
+                        <SimpleSlider
+                            step={0.2}
+                            min={0}
+                            max={1}
+                            value={0.5}
+                            onInput={handleEvent}
+                            onChange={handleEvent}
+                        />
+                    </Item.Description>
                     <Item.Meta>Slider without options</Item.Meta>
                     <Item.Description>
                         <MultirangeSlider
