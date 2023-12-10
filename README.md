@@ -39,7 +39,7 @@ yarn add semantic-ui-react-multirange-slider
 Slider without options
 
 ```jsx
-import MultirangeSlider from 'semantic-ui-react-multirange-slider';
+import { MultirangeSlider } from 'semantic-ui-react-multirange-slider';
 import 'semantic-ui-react-multirange-slider/dist/index.css';
 
 export default () => (
@@ -54,7 +54,7 @@ export default () => (
 Slider with two thumbs
 
 ```jsx
-import MultirangeSlider from 'semantic-ui-react-multirange-slider';
+import { MultirangeSlider } from 'semantic-ui-react-multirange-slider';
 import 'semantic-ui-react-multirange-slider/dist/index.css';
 
 export default () => (
@@ -70,7 +70,7 @@ export default () => (
 Slider with multiple thumbs and green track
 
 ```jsx
-import MultirangeSlider from 'semantic-ui-react-multirange-slider';
+import { MultirangeSlider } from 'semantic-ui-react-multirange-slider';
 import 'semantic-ui-react-multirange-slider/dist/index.css';
 
 export default () => (
@@ -100,7 +100,9 @@ A MultirangeSlider is used to modify multiple values inside a given range
 | --- | --- | --- | --- |
 | [min] | <code>number</code> | <code>0</code> | The minimum possible value |
 | [max] | <code>number</code> | <code>100</code> | The maximum possible value |
-| [values] | <code>Array.<number></code> |  | An array holding all the values |
-| [trackColor] | <code>string</code> | <code>"'blue'"</code> | The color of the track segments |
-| [onChange] | <code>function</code> |  | Called when the values change |
+| [step] | <code>number</code> | <code>1</code> | The step value |
+| [values] | <code>Array.<number></code> | <code>[0]</code> | An array holding all the values |
+| [trackColor] | <code>string</code> | <code>"black"</code> | The color of the track segments |
+| [onInput] | <code>function</code> |  | Continuesly fired while a value changes |
+| [onChange] | <code>function</code> |  | Fired when the values have changed |
 
