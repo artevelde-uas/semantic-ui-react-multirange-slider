@@ -14,6 +14,7 @@ import styles from './index.module.css';
  * @param {number} [step=1] - The step value
  * @param {number[]} [values=[0]] - An array holding all the values
  * @param {string} [trackColor='blue'] - The color of the track segments
+ * @param {function} [onInput] - Continuesly fired while a value changes
  * @param {function} [onChange] - Fired when the values have changed
  */
 export default ({
@@ -22,6 +23,7 @@ export default ({
     step = 1,
     values = [0],
     trackColor = 'black',
+    onInput,
     onChange
 }) => {
     const sliderRef = useRef();
@@ -77,12 +79,29 @@ export default ({
         if (rounded !== previousValue) {
             // Store the new value
             valuesRef.current[currentIndex] = rounded;
+
+            // Create an `input` event
+            const event = new Event('input', { bubbles: true });
+
+            // Set the event data
+            event.data = {
+                index: currentIndex,
+                value: rounded,
+                previousValue,
+                initialValue: values[currentIndex]
+            };
+
+            // Fire the event on the slider element
+            sliderRef.current.dispatchEvent(event);
         }
 
         event.preventDefault();
     }
 
     function handleMouseUp(event) {
+        // Reset the current thumb
+        currentThumb = null;
+
         if (valuesRef.current[currentIndex] !== values[currentIndex]) {
             const event = new Event('input', { bubbles: true });
 
@@ -100,12 +119,16 @@ export default ({
     }
 
     function handleInput(event) {
-        // Change synthetic event type
-        event._reactName = 'onChange';
-        event.type = 'change';
+        if (currentThumb === null) {
+            // Change synthetic event type
+            event._reactName = 'onChange';
+            event.type = 'change';
 
-        // Fire the change event if set
-        onChange && onChange(event, event.nativeEvent.data);
+            // Fire the change event if set
+            onChange && onChange(event, event.nativeEvent.data);
+        } else {
+            onInput && onInput(event, event.nativeEvent.data);
+        }
     }
 
     return (

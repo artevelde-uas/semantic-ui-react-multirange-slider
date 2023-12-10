@@ -18,6 +18,7 @@ export default () => (
                     <Item.Meta>Slider without options</Item.Meta>
                     <Item.Description>
                         <MultirangeSlider
+                            onInput={handleEvent}
                             onChange={handleEvent}
                         />
                     </Item.Description>
@@ -25,6 +26,7 @@ export default () => (
                     <Item.Description>
                         <MultirangeSlider
                             step={20}
+                            onInput={handleEvent}
                             onChange={handleEvent}
                         />
                     </Item.Description>
@@ -37,6 +39,7 @@ export default () => (
                     <Item.Description>
                         <MultirangeSlider
                             values={[0, 50]}
+                            onInput={handleEvent}
                             onChange={handleEvent}
                         />
                     </Item.Description>
@@ -52,6 +55,7 @@ export default () => (
                             max={150}
                             values={[30, 50, 90, 120]}
                             trackColor='green'
+                            onInput={handleEvent}
                             onChange={handleEvent}
                         />
                     </Item.Description>
