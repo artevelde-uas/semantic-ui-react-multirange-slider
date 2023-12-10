@@ -11,6 +11,7 @@ import styles from './index.module.css';
  * 
  * @param {number} [min=0] - The minimum possible value
  * @param {number} [max=100] - The maximum possible value
+ * @param {number} [step=1] - The step value
  * @param {number[]} [values=[0]] - An array holding all the values
  * @param {string} [trackColor='blue'] - The color of the track segments
  * @param {function} [onChange] - Called when the values change
@@ -18,6 +19,7 @@ import styles from './index.module.css';
 export default ({
     min = 0,
     max = 100,
+    step = 1,
     values = [0],
     trackColor = 'black',
     onChange
@@ -53,14 +55,13 @@ export default ({
         const trackWidth = parseFloat(getComputedStyle(currentThumb.parentElement).width);
         const lowerBoundary = previousThumb ? parseFloat(getComputedStyle(previousThumb).left) : 0;
         const upperBoundary = nextThumb ? parseFloat(getComputedStyle(nextThumb).left) : trackWidth;
+        const stepWidth = trackWidth / ((max - min) / step);
         const left = Math.max(lowerBoundary, Math.min(upperBoundary, (event.clientX + offsetLeft)));
-        const thumbLeft = (left / trackWidth) * 100;
+        const leftRounded = Math.round(left / stepWidth) * stepWidth;
+        const thumbLeft = (leftRounded / trackWidth) * 100;
         const trackRight = 100 - thumbLeft;
         const value = (min + ((left / trackWidth) * (max - min)));
-        const rounded = Math.round(value);
-        // const rounded = Math.round((Math.round(value / 0.1) * 0.1) * 1e10) / 1e10;
-        // const rounded = Math.round(Math.round(value) * 1e10) / 1e10;
-        // const rounded = Math.round(Math.round(value) * 10000000000) / 10000000000;
+        const rounded = Math.round((Math.round(value / step) * step) * 1e10) / 1e10;
 
         currentThumb.value = rounded;
         currentThumb.style.left = `${thumbLeft}%`;

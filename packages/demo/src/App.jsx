@@ -16,6 +16,13 @@ export default () => (
                             onChange={console.log}
                         />
                     </Item.Description>
+                    <Item.Meta>Slider with step size of 20</Item.Meta>
+                    <Item.Description>
+                        <MultirangeSlider
+                            step={20}
+                            onChange={console.log}
+                        />
+                    </Item.Description>
                 </Item.Content>
             </Item>
             <Item>
