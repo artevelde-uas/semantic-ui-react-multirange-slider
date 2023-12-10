@@ -27,7 +27,7 @@
     "build-docs": "yarn workspace docs build",
     "copy-readme": "cpy readme-lib.md ../../lib/ --cwd=../docs/build/ && mve readme-lib.md README.md",
     "copy-license": "cpy LICENSE packages/lib/ --cwd=../../",
-    "clean": "rimraf ./dist/ README.md LICENSE package.tgz ../../README.md ../../LICENSE"
+    "clean": "rimraf ./dist/ README.md LICENSE package.tgz"
   },
   "dependencies": {
     "classnames": "^2.3.1"
