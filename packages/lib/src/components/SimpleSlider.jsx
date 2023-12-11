@@ -1,21 +1,20 @@
-import React, { Fragment } from 'react';
-import classNames from 'classnames';
+import React from 'react';
 
-import styles from './index.module.css';
 import MultirangeSlider from './MultirangeSlider';
 
 
 /**
- * @module MultirangeSlider
+ * @module SimpleSlider
  * 
- * @description A MultirangeSlider is used to modify multiple values inside a given range
+ * @description A SimpleSlider is used to modify a value inside a given range
  * 
  * @param {number} [min=0] - The minimum possible value
  * @param {number} [max=100] - The maximum possible value
  * @param {number} [step=1] - The step value
- * @param {number} [value] - The value of the slider
- * @param {string} [trackColor='blue'] - The color of the track segments
- * @param {function} [onChange] - Called when the values change
+ * @param {number} [value=0] - The value of the slider
+ * @param {string} [trackColor=black] - The color of the track
+ * @param {function} [onInput] - Continuesly fired while the value changes
+ * @param {function} [onChange] - Fired after the value has changed
  */
 export default ({
     min = 0,
