@@ -15,7 +15,7 @@ import styles from './index.module.css';
  * @param {number[]} [values=[0]] - An array holding all the values
  * @param {string} [trackColor=black] - The color of the track segments
  * @param {function} [onInput] - Continuesly fired while a value changes
- * @param {function} [onChange] - Fired when the values have changed
+ * @param {function} [onChange] - Fired after a value has changed
  */
 export default ({
     min = 0,

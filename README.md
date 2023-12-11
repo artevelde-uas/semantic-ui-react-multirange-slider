@@ -34,52 +34,142 @@ yarn add semantic-ui-react-multirange-slider
 
 ## Usage
 
-### Simple Slider Example
+In your application root, first import the component styles:
 
-Slider without options
+```jsx
+import 'semantic-ui-css/semantic.min.css';
+import 'react-horizontal-scrolling-menu/dist/styles.css';
+```
+
+Then import the slider component in your code:
 
 ```jsx
 import { MultirangeSlider } from 'semantic-ui-react-multirange-slider';
-import 'semantic-ui-react-multirange-slider/dist/index.css';
+
+export default () => {
+
+    // Continuesly fired while a value changes
+    function handleInput(event, data) {
+        /* `data` format:
+            {
+                index,         // -> The index of the changed thumb
+                value,         // -> The current value of the changed thumb
+                previousValue, // -> The previous value of the changed thumb
+                initialValue   // -> The initial value of the changed thumb
+            }
+        */
+    }
+
+    // Fired after a value has changed
+    function handleChange(event, data) {
+        /* `data` format:
+            {
+                index,         // -> The index of the changed thumb
+                value,         // -> The current value of the changed thumb
+                initialValue   // -> The initial value of the changed thumb,
+                values         // -> The current array of values
+            }
+        */
+    }
+
+    return (
+        <MultirangeSlider
+            min={20}
+            max={150}
+            step={10}
+            values={[40, 70, 120]}
+            trackColor='orange'
+            onInput={handleInput}
+            onChange={handleChange}
+        />
+    );
+};
+```
+
+### Simple Slider Examples
+
+#### Slider without options
+
+![Example image of simple slider without options](/docs/example-simple-1.png)
+
+```jsx
+import { SimpleSlider } from 'semantic-ui-react-multirange-slider';
 
 export default () => (
-    <MultirangeSlider
-        onChange={console.log}
+    <SimpleSlider />
+);
+```
+
+#### Slider with two thumbs
+
+![Example image of simple slider with two thumbs](/docs/example-simple-2.png)
+
+```jsx
+import { SimpleSlider } from 'semantic-ui-react-multirange-slider';
+
+export default () => (
+    <SimpleSlider
+        value={40}
     />
 );
 ```
 
-### Range Slider Example
+#### Slider with two thumbs and blue track
 
-Slider with two thumbs
+![Example image of simple slider with two thumbs and blue track](/docs/example-simple-3.png)
 
 ```jsx
-import { MultirangeSlider } from 'semantic-ui-react-multirange-slider';
-import 'semantic-ui-react-multirange-slider/dist/index.css';
+import { SimpleSlider } from 'semantic-ui-react-multirange-slider';
 
 export default () => (
-    <MultirangeSlider
-        values={[0, 50]}
-        onChange={console.log}
+    <SimpleSlider
+        value={40}
+        trackColor='blue'
     />
 );
 ```
 
 ### Multirange Slider Example
 
-Slider with multiple thumbs and green track
+#### Multirange slider with two thumbs
+
+![Example image of multirange slider with two thumbs](/docs/example-multi-1.png)
 
 ```jsx
 import { MultirangeSlider } from 'semantic-ui-react-multirange-slider';
-import 'semantic-ui-react-multirange-slider/dist/index.css';
 
 export default () => (
     <MultirangeSlider
-        min={20}
-        max={150}
-        values={[30, 50, 90, 120]}
+        values={[20, 60]}
+    />
+);
+```
+
+#### Multirange slider with four thumbs
+
+![Example image of multirange slider with four thumbs](/docs/example-multi-2.png)
+
+```jsx
+import { MultirangeSlider } from 'semantic-ui-react-multirange-slider';
+
+export default () => (
+    <MultirangeSlider
+        values={[10, 30, 50, 80]}
+    />
+);
+```
+
+#### Multirange slider with three thumbs and green track
+
+![Example image of multirange slider with three thumbs and green track](/docs/example-multi-3.png)
+
+```jsx
+import { MultirangeSlider } from 'semantic-ui-react-multirange-slider';
+
+export default () => (
+    <MultirangeSlider
+        values={[10, 40, 80]}
         trackColor='green'
-        onChange={console.log}
     />
 );
 ```
@@ -89,6 +179,17 @@ export default () => (
 Clone the package and run `yarn start`
 
 ## API
+
+### Modules
+
+<dl>
+<dt><a href="#module_MultirangeSlider">MultirangeSlider</a></dt>
+<dd><p>A MultirangeSlider is used to modify multiple values inside a given range</p>
+</dd>
+<dt><a href="#module_SimpleSlider">SimpleSlider</a></dt>
+<dd><p>A SimpleSlider is used to modify a value inside a given range</p>
+</dd>
+</dl>
 
 <a name="module_MultirangeSlider"></a>
 
@@ -104,5 +205,21 @@ A MultirangeSlider is used to modify multiple values inside a given range
 | [values] | <code>Array.<number></code> | <code>[0]</code> | An array holding all the values |
 | [trackColor] | <code>string</code> | <code>"black"</code> | The color of the track segments |
 | [onInput] | <code>function</code> |  | Continuesly fired while a value changes |
-| [onChange] | <code>function</code> |  | Fired when the values have changed |
+| [onChange] | <code>function</code> |  | Fired after a value has changed |
+
+<a name="module_SimpleSlider"></a>
+
+### SimpleSlider
+
+A SimpleSlider is used to modify a value inside a given range
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [min] | <code>number</code> | <code>0</code> | The minimum possible value |
+| [max] | <code>number</code> | <code>100</code> | The maximum possible value |
+| [step] | <code>number</code> | <code>1</code> | The step value |
+| [value] | <code>number</code> | <code>0</code> | The value of the slider |
+| [trackColor] | <code>string</code> | <code>"black"</code> | The color of the track |
+| [onInput] | <code>function</code> |  | Continuesly fired while the value changes |
+| [onChange] | <code>function</code> |  | Fired after the value has changed |
 
