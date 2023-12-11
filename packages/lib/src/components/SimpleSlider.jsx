@@ -1,7 +1,5 @@
-import React, { Fragment } from 'react';
-import classNames from 'classnames';
+import React from 'react';
 
-import styles from './index.module.css';
 import MultirangeSlider from './MultirangeSlider';
 
 
