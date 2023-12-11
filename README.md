@@ -38,7 +38,7 @@ In your application root, first import the component styles:
 
 ```jsx
 import 'semantic-ui-css/semantic.min.css';
-import 'react-horizontal-scrolling-menu/dist/styles.css';
+import 'semantic-ui-react-multirange-slider/dist/styles.css';
 ```
 
 Then import the slider component in your code:
@@ -102,7 +102,7 @@ export default () => (
 
 #### Slider with two thumbs
 
-![Example image of simple slider with two thumbs](/docs/example-simple-2.png)
+![Example image of simple slider with value set](/docs/example-simple-2.png)
 
 ```jsx
 import { SimpleSlider } from 'semantic-ui-react-multirange-slider';
@@ -114,9 +114,9 @@ export default () => (
 );
 ```
 
-#### Slider with two thumbs and blue track
+#### Slider with blue track
 
-![Example image of simple slider with two thumbs and blue track](/docs/example-simple-3.png)
+![Example image of simple slider with blue track](/docs/example-simple-3.png)
 
 ```jsx
 import { SimpleSlider } from 'semantic-ui-react-multirange-slider';
