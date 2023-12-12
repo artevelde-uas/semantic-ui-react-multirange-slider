@@ -14,11 +14,23 @@
     "url": "https://github.com/artevelde-uas/semantic-ui-react-multirange-slider.git",
     "directory": "packages/lib"
   },
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
   "files": [
     "dist/"
   ],
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js",
+      "default": "./dist/index.esm.js"
+    },
+    "./styles.css": "./dist/index.css"
+  },
+  "browser": {
+    ".": "./dist/index.esm.js",
+    "./styles.css": "./dist/index.css"
+  },
   "scripts": {
     "build": "rollup --config",
     "watch": "rollup --config --watch",
