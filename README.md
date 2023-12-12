@@ -38,7 +38,7 @@ In your application root, first import the component styles:
 
 ```jsx
 import 'semantic-ui-css/semantic.min.css';
-import 'semantic-ui-react-multirange-slider/dist/styles.css';
+import 'semantic-ui-react-multirange-slider/styles.css';
 ```
 
 Then import the slider component in your code:
