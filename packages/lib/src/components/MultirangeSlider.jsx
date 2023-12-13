@@ -140,7 +140,7 @@ export default ({
             <div
                 className={styles.track}
             >
-                {valuesRef.current.map((value, index, values) => {
+                {values.map((value, index, values) => {
                     const thumbLeft = ((value - min) / (max - min)) * 100;
                     const trackLeft = (((values[index - 1] ?? min) - min) / (max - min)) * 100;
                     const trackRight = 100 - thumbLeft;
