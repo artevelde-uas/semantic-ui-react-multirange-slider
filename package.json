@@ -20,7 +20,7 @@
     "watch": "yarn workspace semantic-ui-react-multirange-slider watch",
     "dev": "run-p watch start",
     "test": "yarn workspace demo test",
-    "clean": "yarn workspaces foreach run clean"
+    "clean": "yarn workspaces foreach --all run clean"
   },
   "resolutions": {
     "stream-lines": "^1.2.1",
