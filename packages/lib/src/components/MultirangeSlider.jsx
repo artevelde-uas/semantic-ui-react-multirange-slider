@@ -102,6 +102,7 @@ export default ({
             event.data = {
                 index: currentIndex,
                 value: rounded,
+                startValue,
                 previousValue,
                 initialValue: values[currentIndex]
             };
