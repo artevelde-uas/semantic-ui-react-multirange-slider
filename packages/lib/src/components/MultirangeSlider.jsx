@@ -31,15 +31,17 @@ export default ({
 
     let currentIndex;
     let currentThumb = null;
+    let startValue;
     let offsetLeft;
 
     function handleMouseDown(event, index) {
         // Only handle mouse down event on thumbs
         if (!event.target.matches(`.ui.${styles.slider} .${styles.thumb}`)) return;
 
-        // Store current index, thumb and offset
+        // Store current index, thumb, start and offset values
         currentIndex = index;
         currentThumb = event.target;
+        startValue = Number(currentThumb.value);
         offsetLeft = currentThumb.offsetLeft - event.clientX;
 
         // Add mousemove event listener while mouse is down
@@ -116,7 +118,7 @@ export default ({
         currentThumb = null;
 
         // If the value has changed...
-        if (valuesRef.current[currentIndex] !== values[currentIndex]) {
+        if (valuesRef.current[currentIndex] !== startValue) {
             // Create an `input` event
             const event = new Event('input', { bubbles: true });
 
