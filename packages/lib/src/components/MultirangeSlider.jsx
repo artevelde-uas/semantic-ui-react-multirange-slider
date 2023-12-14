@@ -27,7 +27,7 @@ export default ({
     onChange
 }) => {
     const sliderRef = useRef();
-    const valuesRef = useRef(Array.from(values));
+    const valuesRef = useRef(values.map(Number));
 
     let currentIndex;
     let currentThumb = null;
