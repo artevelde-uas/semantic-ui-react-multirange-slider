@@ -114,8 +114,11 @@ export default ({
     }
 
     function handleMouseUp(event) {
-        // Reset the current thumb
+        // Reset current index, thumb, start and offset values
+        currentIndex = undefined;
         currentThumb = null;
+        startValue = undefined;
+        offsetLeft = undefined;
 
         // If the value has changed...
         if (valuesRef.current[currentIndex] !== startValue) {
