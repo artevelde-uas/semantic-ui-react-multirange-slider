@@ -2,7 +2,7 @@ import { MultirangeSlider } from 'semantic-ui-react-multirange-slider';
 
 export default () => {
 
-    // Continuesly fired while a value changes
+    // Continuously fired while a value changes
     function handleInput(event, data) {
         /* `data` format:
             {
