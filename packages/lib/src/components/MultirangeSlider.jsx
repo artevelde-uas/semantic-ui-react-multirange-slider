@@ -76,15 +76,15 @@ export default ({
         const thumbLeft = (leftRounded / trackWidth) * 100;
         const trackRight = 100 - thumbLeft;
 
+        // Set the position of the thumb element
+        currentThumb.style.left = `${thumbLeft}%`;
+        currentThumb.previousElementSibling.style.right = `${trackRight}%`;
+        currentThumb.nextElementSibling.style.left = `${thumbLeft}%`;
+
         // Calculate the actual new values
         const previousValue = valuesRef.current[currentIndex];
         const value = (min + ((left / trackWidth) * (max - min)));
         const rounded = Math.round((Math.round(value / step) * step) * 1e10) / 1e10;
-
-        // Store the new values on the thumb element
-        currentThumb.style.left = `${thumbLeft}%`;
-        currentThumb.previousElementSibling.style.right = `${trackRight}%`;
-        currentThumb.nextElementSibling.style.left = `${thumbLeft}%`;
 
         // If the value has changed...
         if (rounded !== previousValue) {
