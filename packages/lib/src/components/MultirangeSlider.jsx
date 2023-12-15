@@ -35,9 +35,6 @@ export default ({
     let offsetLeft;
 
     function handleMouseDown(event, index) {
-        // Only handle mouse down event on thumbs
-        if (!event.target.matches(`.ui.${styles.slider} .${styles.thumb}`)) return;
-
         // Store current index, thumb, start and offset values
         currentIndex = index;
         currentThumb = event.target;
