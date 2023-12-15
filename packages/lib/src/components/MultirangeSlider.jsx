@@ -115,11 +115,8 @@ export default ({
     }
 
     function handleMouseUp(event) {
-        // Reset current index, thumb, start and offset values
-        currentIndex = undefined;
+        // Reset current thumb
         currentThumb = null;
-        startValue = undefined;
-        offsetLeft = undefined;
 
         // If the value has changed...
         if (valuesRef.current[currentIndex] !== startValue) {
@@ -137,6 +134,11 @@ export default ({
             // Fire the event on the slider element
             sliderRef.current.dispatchEvent(event);
         }
+
+        // Reset current index, start and offset values
+        currentIndex = undefined;
+        startValue = undefined;
+        offsetLeft = undefined;
 
         event.preventDefault();
     }
