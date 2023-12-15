@@ -38,7 +38,7 @@
     "prepack": "yarn build && yarn build-docs && yarn copy-readme && yarn copy-license",
     "postpack": "rimraf README.md LICENSE",
     "build-docs": "yarn workspace docs build",
-    "copy-readme": "cpy readme-lib.md ../../lib/ --cwd=../docs/build/ && mve readme-lib.md README.md",
+    "copy-readme": "cpy readme-lib.md ../../lib/ --cwd=../docs/build --rename=README.md",
     "copy-license": "cpy LICENSE packages/lib/ --cwd=../../",
     "clean": "rimraf ./dist/ README.md LICENSE package.tgz"
   },
@@ -58,7 +58,6 @@
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "cpy-cli": "^4.0.0",
-    "mve": "^0.1.2",
     "postcss-preset-env": "^9.3.0",
     "rimraf": "^5.0.5",
     "rollup": "^4.9.0",
