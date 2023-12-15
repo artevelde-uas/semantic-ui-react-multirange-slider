@@ -30,6 +30,7 @@ export default ({
         onInput && onInput(event, {
             value: data.value,
             previousValue: data.previousValue,
+            startValue: data.startValue,
             initialValue: data.initialValue
         });
     }

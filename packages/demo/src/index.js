@@ -1,13 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import { createRoot } from 'react-dom/client';
 
 import 'semantic-ui-css/semantic.css';
-import 'semantic-ui-react-multirange-slider/dist/index.css';
+import 'semantic-ui-react-multirange-slider/styles.css';
+
+import App from './App';
+
 import './index.css';
 
 
-ReactDOM.render(
-    React.createElement(App),
-    document.getElementById('root')
-);
+const root = createRoot(document.getElementById('root'));
+
+root.render(React.createElement(App));

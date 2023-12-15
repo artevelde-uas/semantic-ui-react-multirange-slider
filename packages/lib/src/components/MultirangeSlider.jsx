@@ -27,19 +27,18 @@ export default ({
     onChange
 }) => {
     const sliderRef = useRef();
-    const valuesRef = useRef(Array.from(values));
+    const valuesRef = useRef(values.map(Number));
 
     let currentIndex;
     let currentThumb = null;
+    let startValue;
     let offsetLeft;
 
     function handleMouseDown(event, index) {
-        // Only handle mouse down event on thumbs
-        if (!event.target.matches(`.ui.${styles.slider} .${styles.thumb}`)) return;
-
-        // Store current index, thumb and offset
+        // Store current index, thumb, start and offset values
         currentIndex = index;
         currentThumb = event.target;
+        startValue = Number(currentThumb.value);
         offsetLeft = currentThumb.offsetLeft - event.clientX;
 
         // Add mousemove event listener while mouse is down
@@ -57,25 +56,38 @@ export default ({
     }
 
     function handleMouseMove(event) {
+        // Get the adjacent thumbs
         const previousThumb = currentThumb.previousElementSibling.previousElementSibling;
         const nextThumb = currentThumb.nextElementSibling.nextElementSibling;
+
+        // Calculate the width of the track
         const trackWidth = parseFloat(getComputedStyle(currentThumb.parentElement).width);
+
+        // Calculate the lower and upper boundaries
         const lowerBoundary = previousThumb ? parseFloat(getComputedStyle(previousThumb).left) : 0;
         const upperBoundary = nextThumb ? parseFloat(getComputedStyle(nextThumb).left) : trackWidth;
-        const stepWidth = trackWidth / ((max - min) / step);
+
+        // Calculate the new values in pixels
         const left = Math.max(lowerBoundary, Math.min(upperBoundary, (event.clientX + offsetLeft)));
+        const stepWidth = trackWidth / ((max - min) / step);
         const leftRounded = Math.round(left / stepWidth) * stepWidth;
+
+        // Calculate the new offsets in percent
         const thumbLeft = (leftRounded / trackWidth) * 100;
         const trackRight = 100 - thumbLeft;
+
+        // Calculate the actual new values
+        const previousValue = valuesRef.current[currentIndex];
         const value = (min + ((left / trackWidth) * (max - min)));
         const rounded = Math.round((Math.round(value / step) * step) * 1e10) / 1e10;
-        const previousValue = valuesRef.current[currentIndex];
 
+        // Store the new values on the thumb element
         currentThumb.value = rounded;
         currentThumb.style.left = `${thumbLeft}%`;
         currentThumb.previousElementSibling.style.right = `${trackRight}%`;
         currentThumb.nextElementSibling.style.left = `${thumbLeft}%`;
 
+        // If the value has changed...
         if (rounded !== previousValue) {
             // Store the new value
             valuesRef.current[currentIndex] = rounded;
@@ -87,6 +99,7 @@ export default ({
             event.data = {
                 index: currentIndex,
                 value: rounded,
+                startValue,
                 previousValue,
                 initialValue: values[currentIndex]
             };
@@ -99,12 +112,15 @@ export default ({
     }
 
     function handleMouseUp(event) {
-        // Reset the current thumb
+        // Reset current thumb
         currentThumb = null;
 
-        if (valuesRef.current[currentIndex] !== values[currentIndex]) {
+        // If the value has changed...
+        if (valuesRef.current[currentIndex] !== startValue) {
+            // Create an `input` event
             const event = new Event('input', { bubbles: true });
 
+            // Set the event data
             event.data = {
                 index: currentIndex,
                 value: valuesRef.current[currentIndex],
@@ -112,23 +128,33 @@ export default ({
                 values: valuesRef.current
             };
 
+            // Fire the event on the slider element
             sliderRef.current.dispatchEvent(event);
         }
+
+        // Reset current index, start and offset values
+        currentIndex = undefined;
+        startValue = undefined;
+        offsetLeft = undefined;
 
         event.preventDefault();
     }
 
     function handleInput(event) {
-        if (currentThumb === null) {
-            // Change synthetic event type
-            event._reactName = 'onChange';
-            event.type = 'change';
-
-            // Fire the change event if set
-            onChange && onChange(event, event.nativeEvent.data);
-        } else {
+        // If no current thumb is set, we are still moving
+        if (currentThumb !== null) {
+            // Fire the 'input' event if set
             onInput && onInput(event, event.nativeEvent.data);
+
+            return;
         }
+
+        // Change synthetic event type
+        event._reactName = 'onChange';
+        event.type = 'change';
+
+        // Fire the 'change' event if set
+        onChange && onChange(event, event.nativeEvent.data);
     }
 
     return (
@@ -140,17 +166,21 @@ export default ({
             <div
                 className={styles.track}
             >
-                {valuesRef.current.map((value, index, values) => {
-                    const thumbLeft = ((value - min) / (max - min)) * 100;
-                    const trackLeft = (((values[index - 1] ?? min) - min) / (max - min)) * 100;
-                    const trackRight = 100 - thumbLeft;
+                {values.map((value, index, values) => {
                     const trackClass = classNames(
                         styles.segment,
+                        // Add the track color
                         { [trackColor]: ((values.length === 1) || (index > 0)) }
                     );
 
+                    // Calculate the thumb and track offsets in percent
+                    const thumbLeft = ((value - min) / (max - min)) * 100;
+                    const trackLeft = (((values[index - 1] ?? min) - min) / (max - min)) * 100;
+                    const trackRight = 100 - thumbLeft;
+
                     return (
                         <Fragment key={index}>
+                            {/* Render each track segment and thumb */}
                             <div
                                 className={trackClass}
                                 style={{
@@ -166,6 +196,7 @@ export default ({
                                 }}
                                 onMouseDown={event => handleMouseDown(event, index)}
                             />
+                            {/* Render the last track segment */}
                             {(index === values.length - 1) && (
                                 <div
                                     className={styles.segment}

@@ -11,7 +11,7 @@
     "clean": "rimraf ./build/"
   },
   "dependencies": {
-    "jsdoc-to-markdown": "^7.1.1",
+    "jsdoc-to-markdown": "^8.0.0",
     "mkabs": "^1.2.4",
     "mkast": "^1.2.12",
     "mkdoc": "^1.0.49",
@@ -20,8 +20,8 @@
     "mkpi": "^1.1.6"
   },
   "devDependencies": {
-    "mkdirp": "^1.0.4",
-    "rimraf": "^3.0.2",
+    "mkdirp": "^3.0.1",
+    "rimraf": "^5.0.5",
     "watch": "^1.0.2"
   }
 }
