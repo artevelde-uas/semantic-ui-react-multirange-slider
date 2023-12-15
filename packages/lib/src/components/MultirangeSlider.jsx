@@ -29,16 +29,16 @@ export default ({
     const sliderRef = useRef();
     const valuesRef = useRef(values.map(Number));
 
-    let currentIndex;
     let currentThumb = null;
+    let currentIndex;
     let startValue;
     let offsetLeft;
 
     function handleMouseDown(event, index) {
-        // Store current index, thumb, start and offset values
-        currentIndex = index;
+        // Store current thumb, index, start and offset values
         currentThumb = event.target;
-        startValue = Number(currentThumb.value);
+        currentIndex = index;
+        startValue = valuesRef.current[currentIndex];
         offsetLeft = currentThumb.offsetLeft - event.clientX;
 
         // Add mousemove event listener while mouse is down
@@ -82,7 +82,6 @@ export default ({
         const rounded = Math.round((Math.round(value / step) * step) * 1e10) / 1e10;
 
         // Store the new values on the thumb element
-        currentThumb.value = rounded;
         currentThumb.style.left = `${thumbLeft}%`;
         currentThumb.previousElementSibling.style.right = `${trackRight}%`;
         currentThumb.nextElementSibling.style.left = `${thumbLeft}%`;
@@ -188,9 +187,8 @@ export default ({
                                     right: `${trackRight}%`
                                 }}
                             />
-                            <button
+                            <span
                                 className={styles.thumb}
-                                value={value}
                                 style={{
                                     left: `${thumbLeft}%`
                                 }}
