@@ -6,7 +6,7 @@
     "semantic-ui",
     "spinbutton"
   ],
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": "Renaat De Muynck <renaat.demuynck@arteveldehs.be>",
   "license": "ISC",
   "repository": {
