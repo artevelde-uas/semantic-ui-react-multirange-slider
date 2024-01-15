@@ -6,7 +6,7 @@
     "semantic-ui",
     "spinbutton"
   ],
-  "version": "0.3.2",
+  "version": "0.3.3",
   "author": "Renaat De Muynck <renaat.demuynck@arteveldehs.be>",
   "license": "ISC",
   "repository": {
@@ -17,7 +17,6 @@
   "files": [
     "dist/"
   ],
-  "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "exports": {
