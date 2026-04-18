@@ -6,7 +6,7 @@
     "semantic-ui",
     "spinbutton"
   ],
-  "version": "0.3.3",
+  "version": "0.3.4",
   "author": "Renaat De Muynck <renaat.demuynck@arteveldehs.be>",
   "license": "ISC",
   "repository": {
@@ -17,18 +17,20 @@
   "files": [
     "dist/"
   ],
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
+  "sideEffects": [
+    "*.css"
+  ],
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
   "exports": {
     ".": {
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.cjs.js",
-      "default": "./dist/index.esm.js"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
     },
     "./styles.css": "./dist/index.css"
   },
   "browser": {
-    ".": "./dist/index.esm.js",
+    ".": "./dist/index.mjs",
     "./styles.css": "./dist/index.css"
   },
   "scripts": {
@@ -37,7 +39,7 @@
     "prepack": "yarn build && yarn build-docs && yarn copy-readme && yarn copy-license",
     "postpack": "rimraf README.md LICENSE",
     "build-docs": "yarn workspace docs build",
-    "copy-readme": "cpy readme-lib.md ../../lib/ --cwd=../docs/build/ && mve readme-lib.md README.md",
+    "copy-readme": "cpy readme-lib.md ../../lib/ --cwd=../docs/build --rename=README.md",
     "copy-license": "cpy LICENSE packages/lib/ --cwd=../../",
     "clean": "rimraf ./dist/ README.md LICENSE package.tgz"
   },
@@ -56,8 +58,7 @@
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
-    "cpy-cli": "^5.0.0",
-    "mve": "^0.1.2",
+    "cpy-cli": "^4.0.0",
     "postcss-preset-env": "^9.3.0",
     "rimraf": "^5.0.5",
     "rollup": "^4.9.0",

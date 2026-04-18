@@ -1,3 +1,5 @@
+import { createRequire } from 'node:module';
+
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
@@ -5,14 +7,16 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import postcssPresetEnv from 'postcss-preset-env';
 
-import pkg from './package.json' assert { type: 'json' };
+const require = createRequire(import.meta.url);
+const pkg = require('./package.json');
 
 
 export default {
     input: 'src/index.js',
     output: [{
         file: pkg.main,
-        format: 'cjs'
+        format: 'cjs',
+        exports: 'named'
     }, {
         file: pkg.module,
         format: 'esm'

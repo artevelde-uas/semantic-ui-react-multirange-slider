@@ -14,7 +14,7 @@ import styles from './index.module.css';
  * @param {number} [step=1] - The step value
  * @param {number[]} [values=[0]] - An array holding all the values
  * @param {string} [trackColor=black] - The color of the track segments
- * @param {function} [onInput] - Continuesly fired while a value changes
+ * @param {function} [onInput] - Continuously fired while a value changes
  * @param {function} [onChange] - Fired after a value has changed
  */
 export default ({
@@ -29,16 +29,16 @@ export default ({
     const sliderRef = useRef();
     const valuesRef = useRef(values.map(Number));
 
-    let currentIndex;
     let currentThumb = null;
+    let currentIndex;
     let startValue;
     let offsetLeft;
 
     function handleMouseDown(event, index) {
-        // Store current index, thumb, start and offset values
-        currentIndex = index;
+        // Store current thumb, index, start and offset values
         currentThumb = event.target;
-        startValue = Number(currentThumb.value);
+        currentIndex = index;
+        startValue = valuesRef.current[currentIndex];
         offsetLeft = currentThumb.offsetLeft - event.clientX;
 
         // Add mousemove event listener while mouse is down
@@ -76,16 +76,15 @@ export default ({
         const thumbLeft = (leftRounded / trackWidth) * 100;
         const trackRight = 100 - thumbLeft;
 
+        // Set the position of the thumb element
+        currentThumb.style.left = `${thumbLeft}%`;
+        currentThumb.previousElementSibling.style.right = `${trackRight}%`;
+        currentThumb.nextElementSibling.style.left = `${thumbLeft}%`;
+
         // Calculate the actual new values
         const previousValue = valuesRef.current[currentIndex];
         const value = (min + ((left / trackWidth) * (max - min)));
         const rounded = Math.round((Math.round(value / step) * step) * 1e10) / 1e10;
-
-        // Store the new values on the thumb element
-        currentThumb.value = rounded;
-        currentThumb.style.left = `${thumbLeft}%`;
-        currentThumb.previousElementSibling.style.right = `${trackRight}%`;
-        currentThumb.nextElementSibling.style.left = `${thumbLeft}%`;
 
         // If the value has changed...
         if (rounded !== previousValue) {
@@ -188,9 +187,8 @@ export default ({
                                     right: `${trackRight}%`
                                 }}
                             />
-                            <button
+                            <span
                                 className={styles.thumb}
-                                value={value}
                                 style={{
                                     left: `${thumbLeft}%`
                                 }}

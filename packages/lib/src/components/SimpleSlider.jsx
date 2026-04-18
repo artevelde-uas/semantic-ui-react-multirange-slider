@@ -13,7 +13,7 @@ import MultirangeSlider from './MultirangeSlider';
  * @param {number} [step=1] - The step value
  * @param {number} [value=0] - The value of the slider
  * @param {string} [trackColor=black] - The color of the track
- * @param {function} [onInput] - Continuesly fired while the value changes
+ * @param {function} [onInput] - Continuously fired while the value changes
  * @param {function} [onChange] - Fired after the value has changed
  */
 export default ({

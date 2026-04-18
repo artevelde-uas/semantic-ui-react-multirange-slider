@@ -48,7 +48,7 @@ import { MultirangeSlider } from 'semantic-ui-react-multirange-slider';
 
 export default () => {
 
-    // Continuesly fired while a value changes
+    // Continuously fired while a value changes
     function handleInput(event, data) {
         /* `data` format:
             {
@@ -204,7 +204,7 @@ A MultirangeSlider is used to modify multiple values inside a given range
 | [step] | <code>number</code> | <code>1</code> | The step value |
 | [values] | <code>Array.<number></code> | <code>[0]</code> | An array holding all the values |
 | [trackColor] | <code>string</code> | <code>"black"</code> | The color of the track segments |
-| [onInput] | <code>function</code> |  | Continuesly fired while a value changes |
+| [onInput] | <code>function</code> |  | Continuously fired while a value changes |
 | [onChange] | <code>function</code> |  | Fired after a value has changed |
 
 <a name="module_SimpleSlider"></a>
@@ -220,6 +220,6 @@ A SimpleSlider is used to modify a value inside a given range
 | [step] | <code>number</code> | <code>1</code> | The step value |
 | [value] | <code>number</code> | <code>0</code> | The value of the slider |
 | [trackColor] | <code>string</code> | <code>"black"</code> | The color of the track |
-| [onInput] | <code>function</code> |  | Continuesly fired while the value changes |
+| [onInput] | <code>function</code> |  | Continuously fired while the value changes |
 | [onChange] | <code>function</code> |  | Fired after the value has changed |
 
