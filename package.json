@@ -1,6 +1,8 @@
 {
   "private": true,
   "homepage": "https://github.com/artevelde-uas/semantic-ui-react-multirange-slider",
+  "author": "Renaat De Muynck <renaat.demuynck@arteveldehs.be>",
+  "license": "ISC",
   "repository": {
     "type": "git",
     "url": "https://github.com/artevelde-uas/semantic-ui-react-multirange-slider.git"
